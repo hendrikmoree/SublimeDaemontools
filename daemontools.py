@@ -24,7 +24,7 @@ class Daemontools(WindowCommand):
             elif i == 1:
                 self._showActions(service)
             else:
-                self._doAction(service, actions[i + 1])
+                self._doAction(service, actions[i - 2])
         set_timeout(lambda: self.window.show_quick_panel(["..", status] + actions, choose), 0)
 
     def _doAction(self, service, action):
