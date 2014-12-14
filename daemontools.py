@@ -1,6 +1,6 @@
 from sublime_plugin import WindowCommand
 from .utils import remoteCommand
-from sublime import set_timeout
+from sublime import set_timeout, message_dialog
 
 class Daemontools(WindowCommand):
 
@@ -9,12 +9,16 @@ class Daemontools(WindowCommand):
         self._listServices()
 
     def _listServices(self):
-        services = remoteCommand(self.view, "ls -1 /etc/service").strip().split('\n')
-        set_timeout(lambda: self.window.show_quick_panel(services, lambda i: self._showActions(services[i]) if i != -1 else None), 0)
+        result = remoteCommand(self.view, "svstat /etc/service/*").strip()
+        if result:
+            services = [s[len('/etc/service/'):] for s in result.split('\n')]
+            set_timeout(lambda: self.window.show_quick_panel(services, lambda i: self._showActions(services[i].split(':')[0]) if i != -1 else None), 0)
+        else:
+            message_dialog("No service found")
 
     def _showActions(self, service):
         actions = ['start', 'stop', 'restart']
-        status = remoteCommand(self.view, "svstat /etc/service/{0}".format(service)).strip()
+        status = remoteCommand(self.view, "svstat /etc/service/{0}".format(service)).strip()[len('/etc/service/'):]
 
         def choose(i):
             if i == -1:

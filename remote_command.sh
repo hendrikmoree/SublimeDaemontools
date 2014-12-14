@@ -25,7 +25,6 @@ while true; do
     mountPoint=$(dirname "$mountPoint")
 done
 if [ "$mountPoint" == "/" ] || [ "$mountPoint" == "." ] || [ "$mountPoint" == "$HOME/development" ] || [ "$mountPoint" == "$HOME" ]; then
-    echo $COMMAND
     $COMMAND
     exit
 fi
