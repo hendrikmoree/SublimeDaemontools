@@ -1,12 +1,14 @@
 from sublime_plugin import WindowCommand, TextCommand
 from .utils import remoteCommand
 from sublime import set_timeout, message_dialog, Region, active_window
+from threading import Thread
 
 class Daemontools(WindowCommand):
 
     def run(self):
         self.view = self.window.active_view()
-        self._listServices()
+        t = Thread(target=self._listServices)
+        t.start()
 
     def _listServices(self):
         result = remoteCommand(self.view, "svstat /etc/service/*").strip()
