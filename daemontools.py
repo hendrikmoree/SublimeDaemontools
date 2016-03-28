@@ -53,13 +53,16 @@ class Daemontools(WindowCommand):
         name = "Log {0}".format(service)
         newView = self.view.window().new_file()
         newView.set_name(name)
-        newView.set_syntax_file("Packages/Text/Plain text.tmLanguage")
+        newView.set_syntax_file("Packages/SublimeDaemontools/daemontools.tmLanguage")
         newView.set_scratch(True)
         refreshLog(service, newView)
 
-def refreshLog(service, view, lines=0):
+def refreshLog(service, view, lines=None):
     if not view.window():
         return
+    if lines is None:
+        print (remoteCommand(view, "wc -l /etc/service/{0}/log/main/current".format(service)))
+        lines = int(remoteCommand(view, "wc -l /etc/service/{0}/log/main/current".format(service)).split()[0]) - 100
     visibleRegion = view.visible_region()
     currentLine = view.line(Region(visibleRegion.b, visibleRegion.b))
     lastLine = view.line(Region(view.size(), view.size()))

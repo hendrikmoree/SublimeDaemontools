@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array/>
+	<key>name</key>
+	<string>Daemontools</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>match</key>
+			<string>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{9}</string>
+			<key>name</key>
+			<string>string</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(\d{1,3}\.){3}\d{1,3}</string>
+			<key>name</key>
+			<string>constant.numeric</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string> -</string>
+			<key>name</key>
+			<string>comment</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\"\-\"</string>
+			<key>name</key>
+			<string>comment</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\[\d*/\w*/\d*:\d{2}:\d{2}:\d{2} \+\d{4}\]</string>
+			<key>name</key>
+			<string>support.function</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\"[a-zA-Z0-9 /?%&amp;=_\.\-]*\"</string>
+			<key>name</key>
+			<string>keyword.control.flow.python</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>Traceback</string>
+			<key>end</key>
+			<string>Exception:.*$</string>
+			<key>name</key>
+			<string>variable.language.python</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{9}</string>
+					<key>name</key>
+					<string>string</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>source.daemontools</string>
+	<key>uuid</key>
+	<string>eafd48bc-0482-4959-9a47-af03b29b79ff</string>
+</dict>
+</plist>

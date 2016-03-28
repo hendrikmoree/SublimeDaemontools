@@ -1,6 +1,5 @@
 from subprocess import Popen, PIPE, TimeoutExpired
 from os.path import dirname, abspath
-from time import sleep
 
 mydir = dirname(abspath(__file__))
 
